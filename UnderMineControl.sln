@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnderMineControl.Mods.Example", "UnderMineControl.Mods.Example\UnderMineControl.Mods.Example.csproj", "{F04F489E-77D2-44E1-ADD8-081350874D7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{A8830132-18F9-43C9-93B1-40F09F85F4DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8830132-18F9-43C9-93B1-40F09F85F4DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8830132-18F9-43C9-93B1-40F09F85F4DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F04F489E-77D2-44E1-ADD8-081350874D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F04F489E-77D2-44E1-ADD8-081350874D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F04F489E-77D2-44E1-ADD8-081350874D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F04F489E-77D2-44E1-ADD8-081350874D7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +51,7 @@ Global
 		{7DCFB579-13C4-4295-A02A-957314773AED} = {2FC73064-7A35-4D49-AE40-FD83ECAD33D2}
 		{8AEB8E37-E926-482B-AF0D-1C6213E9E858} = {2FC73064-7A35-4D49-AE40-FD83ECAD33D2}
 		{A8830132-18F9-43C9-93B1-40F09F85F4DC} = {1B8CEEAF-F6FF-4CDE-8C82-138A04491126}
+		{F04F489E-77D2-44E1-ADD8-081350874D7B} = {1B8CEEAF-F6FF-4CDE-8C82-138A04491126}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A31B1B4B-6061-4802-AC55-9FCB40D4C647}
