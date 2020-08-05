@@ -47,6 +47,7 @@ namespace UnderMineControl.Mods.Example
         {
             // Lets check to see if the F10 key is held down
             // Then lets change the character's name
+            // Note: You will have to quit to the main menu for it to change in game!
             if (_game.KeyDown(KeyCode.F10))
                 _game.Data.SetPeonName("Doug");
 
