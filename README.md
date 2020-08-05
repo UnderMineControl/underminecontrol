@@ -2,6 +2,8 @@
 An Unofficial Mod API meant for extending and adding functionality to the popular game UnderMine.
 This takes a lot of inspiration from the now deprecated [UnderMod](https://github.com/bwdymods/UnderMod). 
 
+Check the [wiki](https://github.com/calico-crusade/underminecontrol/wiki) for more information and guides!
+
 # Features
 * Support for version 0.7.1.6 of the game on steam (Windows) (Will update to 1.0 upon release)
 * Allows for patching of methods in the game using [Harmony](https://github.com/pardeike/Harmony)
