@@ -11,7 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mods", "Mods", "{1B8CEEAF-F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{2FC73064-7A35-4D49-AE40-FD83ECAD33D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnderMineControl.Mods.CheatMenu", "UnderMineControl.Mods.CheatMenu\UnderMineControl.Mods.CheatMenu.csproj", "{A8830132-18F9-43C9-93B1-40F09F85F4DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnderMineControl.Mods.CheatMenu", "UnderMineControl.Mods.CheatMenu\UnderMineControl.Mods.CheatMenu.csproj", "{A8830132-18F9-43C9-93B1-40F09F85F4DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F98E3391-5A12-4A42-857A-A3C9BF77861F}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
