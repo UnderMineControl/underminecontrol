@@ -2,8 +2,10 @@
 
 namespace UnderMineControl.Models
 {
+    using API.Models;
+
     [DataContract]
-    public class ModJson
+    public class ModJson : IModSettings
     {
         [DataMember]
         public string Name { get; set; }

@@ -15,10 +15,9 @@ namespace UnderMineControl.Utility
 
         public Events(IGame game, ILogger logger, IPatcher patcher)
         {
-            _game = game ?? throw new NullReferenceException("game");
-            _logger = logger ?? throw new NullReferenceException("logger");
-            _patcher = patcher ?? throw new NullReferenceException("patcher");
-
+            _game = game;
+            _logger = logger;
+            _patcher = patcher;
             _instance = this;
         }
 
@@ -51,20 +50,19 @@ namespace UnderMineControl.Utility
 
         public static void PlayerEvent(PlayerEvent playerEvent)
         {
-            switch(playerEvent.Type)
+            switch (playerEvent.Type)
             {
                 case Thor.PlayerEvent.EventType.DestroysAvatar:
-                    _instance.OnAvatarSpawned(_instance._game, playerEvent.Player);
+                    _instance.OnAvatarSpawned(_instance._game, playerEvent?.Player);
                     break;
                 case Thor.PlayerEvent.EventType.SpawnsAvatar:
-                    _instance.OnAvatarDestroyed(_instance._game, playerEvent.Player);
-                    break;                    
+                    _instance.OnAvatarDestroyed(_instance._game, playerEvent?.Player);
+                    break;
             }
         }
 
         public void Patch()
         {
-
             _logger.Info("Starting Patching...");
 
             _patcher.Patch(this, typeof(Game), "Update", null, "GameUpdated");

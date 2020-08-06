@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{931DF043-C316-43A1-B57E-4E57D426A4C0}</ProjectGuid>
+    <ProjectGuid>{CBFDB489-B923-415A-AEE5-05A61188C461}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnderMineControl.API</RootNamespace>
-    <AssemblyName>UnderMineControl.API</AssemblyName>
+    <RootNamespace>UnderMineControl.Mods.ExampleMod</RootNamespace>
+    <AssemblyName>UnderMineControl.Mods.ExampleMod</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -50,16 +50,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IEvents.cs" />
-    <Compile Include="IGame.cs" />
-    <Compile Include="ILogger.cs" />
-    <Compile Include="IPatcher.cs" />
-    <Compile Include="IPlayer.cs" />
-    <Compile Include="Mod.cs" />
-    <Compile Include="Models\IMod.cs" />
-    <Compile Include="Models\IModSettings.cs" />
-    <Compile Include="Models\IVersion.cs" />
+    <Compile Include="ExampleMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UnderMineControl.API\UnderMineControl.API.csproj">
+      <Project>{931df043-c316-43a1-b57e-4e57d426a4c0}</Project>
+      <Name>UnderMineControl.API</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Example.umc" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

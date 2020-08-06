@@ -88,8 +88,18 @@
 
         public void ChangeHP(int amount, HealthExt.DamageType type = HealthExt.DamageType.Physical, bool ignoreGrace = true)
         {
+
             var avatar = _game.Player.Avatar;
-            Health.ChangeHP(avatar, avatar, type, ignoreGrace, amount, out int _);
+            var args = new HealthExt.ChangeHPArgs()
+            {
+                origin = avatar,
+                source = avatar,
+                damageType = type,
+                ignoreGrace = ignoreGrace,
+                delta = amount
+            };
+
+            Health.ChangeHP(args, out int _);
         }
     }
 }

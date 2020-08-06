@@ -42,7 +42,7 @@ namespace UnderMineControl
             entity.Setup();
 
             GetAllGameEntities().Add(entity);
-            Game.Simulation.FireEvent(new SimulationEvent.EntitySpawned(entity, position));
+            Game.Simulation.FireEvent(SimulationEvent.EntitySpawned.Create(entity, position));
             return entity;
         }
 

@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnderMineControl.API", "UnderMineControl.API\UnderMineControl.API.csproj", "{7DCFB579-13C4-4295-A02A-957314773AED}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnderMineControl", "UnderMineControl\UnderMineControl.csproj", "{8AEB8E37-E926-482B-AF0D-1C6213E9E858}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mods", "Mods", "{1B8CEEAF-F6FF-4CDE-8C82-138A04491126}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{2FC73064-7A35-4D49-AE40-FD83ECAD33D2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnderMineControl.Mods.CheatMenu", "UnderMineControl.Mods.CheatMenu\UnderMineControl.Mods.CheatMenu.csproj", "{A8830132-18F9-43C9-93B1-40F09F85F4DC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F98E3391-5A12-4A42-857A-A3C9BF77861F}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,7 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnderMineControl.Mods.Example", "UnderMineControl.Mods.Example\UnderMineControl.Mods.Example.csproj", "{F04F489E-77D2-44E1-ADD8-081350874D7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnderMineControl.API", "UnderMineControl.API\UnderMineControl.API.csproj", "{931DF043-C316-43A1-B57E-4E57D426A4C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnderMineControl.Mods.ExampleMod", "UnderMineControl.Mods.ExampleMod\UnderMineControl.Mods.ExampleMod.csproj", "{CBFDB489-B923-415A-AEE5-05A61188C461}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnderMineControl.Mods.CheatMenu", "UnderMineControl.Mods.CheatMenu\UnderMineControl.Mods.CheatMenu.csproj", "{7AEC02F3-269F-46EE-AE56-916001238AAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,31 +27,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7DCFB579-13C4-4295-A02A-957314773AED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DCFB579-13C4-4295-A02A-957314773AED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DCFB579-13C4-4295-A02A-957314773AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DCFB579-13C4-4295-A02A-957314773AED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8AEB8E37-E926-482B-AF0D-1C6213E9E858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8AEB8E37-E926-482B-AF0D-1C6213E9E858}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AEB8E37-E926-482B-AF0D-1C6213E9E858}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AEB8E37-E926-482B-AF0D-1C6213E9E858}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A8830132-18F9-43C9-93B1-40F09F85F4DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8830132-18F9-43C9-93B1-40F09F85F4DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A8830132-18F9-43C9-93B1-40F09F85F4DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8830132-18F9-43C9-93B1-40F09F85F4DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F04F489E-77D2-44E1-ADD8-081350874D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F04F489E-77D2-44E1-ADD8-081350874D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F04F489E-77D2-44E1-ADD8-081350874D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F04F489E-77D2-44E1-ADD8-081350874D7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{931DF043-C316-43A1-B57E-4E57D426A4C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{931DF043-C316-43A1-B57E-4E57D426A4C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{931DF043-C316-43A1-B57E-4E57D426A4C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{931DF043-C316-43A1-B57E-4E57D426A4C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBFDB489-B923-415A-AEE5-05A61188C461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBFDB489-B923-415A-AEE5-05A61188C461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBFDB489-B923-415A-AEE5-05A61188C461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBFDB489-B923-415A-AEE5-05A61188C461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AEC02F3-269F-46EE-AE56-916001238AAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AEC02F3-269F-46EE-AE56-916001238AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AEC02F3-269F-46EE-AE56-916001238AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AEC02F3-269F-46EE-AE56-916001238AAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7DCFB579-13C4-4295-A02A-957314773AED} = {2FC73064-7A35-4D49-AE40-FD83ECAD33D2}
 		{8AEB8E37-E926-482B-AF0D-1C6213E9E858} = {2FC73064-7A35-4D49-AE40-FD83ECAD33D2}
-		{A8830132-18F9-43C9-93B1-40F09F85F4DC} = {1B8CEEAF-F6FF-4CDE-8C82-138A04491126}
-		{F04F489E-77D2-44E1-ADD8-081350874D7B} = {1B8CEEAF-F6FF-4CDE-8C82-138A04491126}
+		{931DF043-C316-43A1-B57E-4E57D426A4C0} = {2FC73064-7A35-4D49-AE40-FD83ECAD33D2}
+		{CBFDB489-B923-415A-AEE5-05A61188C461} = {1B8CEEAF-F6FF-4CDE-8C82-138A04491126}
+		{7AEC02F3-269F-46EE-AE56-916001238AAB} = {1B8CEEAF-F6FF-4CDE-8C82-138A04491126}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A31B1B4B-6061-4802-AC55-9FCB40D4C647}

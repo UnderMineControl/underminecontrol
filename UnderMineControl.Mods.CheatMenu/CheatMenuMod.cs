@@ -7,43 +7,32 @@ namespace UnderMineControl.Mods.CheatMenu
 {
     using API;
 
-    public class CheatMenuMod : IMod
+    public class CheatMenuMod : Mod
     {
-        private readonly IGame _game;
-        private readonly API.ILogger _logger;
-        private readonly IEvents _events;
-        private readonly IPlayer _player;
-
         private Dictionary<KeyCode, Action> _cheatOptions;
 
-        public CheatMenuMod(IGame game, API.ILogger logger, IEvents events, IPlayer player)
+        public override void Initialize()
         {
-            _game = game;
-            _logger = logger;
-            _events = events;
-            _player = player;
-        }
-
-        public void Initialize()
-        {
-            _logger.Debug("Cheat Menu Mod is intializing...");
+            Logger.Debug("Cheat Menu Mod is intializing...");
             _cheatOptions = new Dictionary<KeyCode, Action>
             {
                 [KeyCode.F1] = OpenDoors,
                 [KeyCode.F2] = CloseDoors,
-                [KeyCode.F3] = () => _player.Invulnerable = !_player.Invulnerable,
-                [KeyCode.F4] = () => _player.MaxHP = _player.CurrentHP = 1500,
-                [KeyCode.F5] = () => _player.AddRandomBlessing(),
-                [KeyCode.F6] = () => _player.Bombs = _player.Keys = _player.Gold = _player.Thorium = 1000
+                [KeyCode.F3] = () => Player.Invulnerable = !Player.Invulnerable,
+                [KeyCode.F4] = () => Player.MaxHP = Player.CurrentHP = 1500,
+                [KeyCode.F5] = () => Player.AddRandomBlessing(),
+                [KeyCode.F6] = () => { Player.RemoveRandomCurse(out _); Player.RemoveRandomCurse(out _, HealthExt.CurseType.Major); },
+                [KeyCode.F7] = () => Player.Bombs = Player.Keys = Player.Gold = Player.Thorium = 10000,
+                [KeyCode.F8] = () => Player.Gold *= 2
             };
-            _events.OnGameUpdated += OnGameUpdated;
+            Events.OnGameUpdated += OnGameUpdated;
         }
 
         private void OnGameUpdated(object sender, IGame e)
         {
             foreach(var op in _cheatOptions)
             {
-                if (!_game.KeyDown(op.Key))
+                if (!GameInstance.KeyDown(op.Key))
                     continue;
 
                 op.Value();
@@ -53,14 +42,14 @@ namespace UnderMineControl.Mods.CheatMenu
 
         private void OpenDoors()
         {
-            Game.Instance.Simulation.Zone.CurrentRoom.OpenDoors();
-            _logger.Debug("Doors opened");
+            GameInstance.Simulation.Zone.CurrentRoom.OpenDoors();
+            Logger.Debug("Doors opened");
         }
 
         private void CloseDoors()
         {
-            Game.Instance.Simulation.Zone.CurrentRoom.CloseDoors();
-            _logger.Debug("Doors closed");
+            GameInstance.Simulation.Zone.CurrentRoom.CloseDoors();
+            Logger.Debug("Doors closed");
         }
     }
 }

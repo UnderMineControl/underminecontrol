@@ -1,0 +1,23 @@
+﻿# The name of the mod
+Name: Example Mod
+
+# A description of the mod
+TagLine: Adds an example mod to the game.
+
+# The author of the mod
+Author: calico-crusade
+
+# The version of the game the mod supports
+GameVersion: 1.0.0.0
+
+# The version of the api the mod uses
+ApiVersion: 0.0.0.2
+
+# The version of your mod
+Version: 1.0.0.0
+
+# This is the list of all of the files that contain a mod, split by a colon (,). Example: Mod1.dll, Mod2.dll 
+EntryFiles: UnderMineControl.Mods.ExampleMod.dll
+
+# The URL to the home page of your mod
+Url: https://github.com/calico-crusade/underminecontrol

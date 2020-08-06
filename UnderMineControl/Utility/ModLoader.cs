@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Runtime.Serialization.Json;
 
 namespace UnderMineControl.Utility
 {
     using API;
+    using API.Models;
     using Models;
     using System.Linq;
 
@@ -17,15 +17,16 @@ namespace UnderMineControl.Utility
 
     public class ModLoader : IModLoader
     {
-        private const string FILE_EXT = "*.umcmod.json";
+        private const string FILE_EXT = "*.umc";
 
-        private readonly IReflectionUtility _reflection;
         private readonly ILogger _logger;
+        private readonly IConfigReader _config;
+        private Dictionary<Type, object> _injectables = new Dictionary<Type, object>();
 
-        public ModLoader(IReflectionUtility reflection, ILogger logger)
+        public ModLoader(ILogger logger, IConfigReader config)
         {
-            _reflection = reflection;
             _logger = logger;
+            _config = config;
         }
 
         public IEnumerable<ModImplementation> LoadMods()
@@ -35,36 +36,11 @@ namespace UnderMineControl.Utility
             _logger.Debug($"Found {files.Length} mods! Starting load.\r\n{curDir}");
             foreach(var file in files)
             {
-                var json = LoadJson(file);
+                var json = _config.LoadModJson(file);
                 if (json == null)
                     continue;
 
                 yield return LoadMod(json, file);
-            }
-        }
-
-        public ModJson LoadJson(string file)
-        {
-            _logger.Debug("Loading mod file: " + file);
-
-            if (!File.Exists(file))
-            {
-                _logger.Warn("Json file doesn't exist: " + file);
-                return null;
-            }
-
-            try
-            {
-                using (var io = File.OpenRead(file))
-                {
-                    var sr = new DataContractJsonSerializer(typeof(ModJson));
-                    return (ModJson)sr.ReadObject(io);
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.Error($"Json file failed to parse: {file}\r\n{ex}");
-                return null;
             }
         }
 
@@ -85,7 +61,7 @@ namespace UnderMineControl.Utility
                 ApiVer = new Version(json.Versions.Api),
                 GameVer = new Version(json.Versions.Game),
                 ModVer = new Version(json.Versions.Mod),
-                Mods = new Dictionary<Assembly, IMod[]>()
+                Mods = new Dictionary<Assembly, Mod[]>()
             };
 
             if (!ValidateVersion(imp.ModVer, imp.GameVer, imp.ApiVer))
@@ -131,17 +107,31 @@ namespace UnderMineControl.Utility
         }
 
         //TODO: Complete this
-        public bool ValidateVersion(Version mod, Version game, Version api)
+        public bool ValidateVersion(IVersion mod, IVersion game, IVersion api)
         {
             return true;
         }
 
-        public IEnumerable<IMod> LoadMod(Assembly assm, ModImplementation bas)
+        public IEnumerable<Mod> LoadMod(Assembly assm, ModImplementation bas)
         {
-            var types = _reflection.GetTypes(typeof(IMod), assm);
-            foreach (var type in types)
+            var t = typeof(Mod);
+            var types = assm.GetTypes();
+            foreach(var type in types)
             {
-                yield return (IMod)_reflection.GetInstance(type);
+                if (type.IsInterface || 
+                    type.IsAbstract ||
+                    !t.IsAssignableFrom(type))
+                    continue;
+
+                var instance = Activator.CreateInstance(type);
+                if (instance == null)
+                    continue;
+
+                var mod = (Mod)instance;
+
+                mod.ModData = bas;
+
+                yield return mod;
             }
         }
     }

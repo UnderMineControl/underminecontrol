@@ -4,14 +4,15 @@ using System.Reflection;
 namespace UnderMineControl.Models
 {
     using API;
+    using API.Models;
 
-    public class ModImplementation
+    public class ModImplementation : IMod
     {
         public string JsonFilePath { get; set; }
-        public ModJson Data { get; set; }
-        public Dictionary<Assembly, IMod[]> Mods { get; set; }
-        public Version ModVer { get; set; }
-        public Version GameVer { get; set; }
-        public Version ApiVer { get; set; }
+        public IModSettings Data { get; set; }
+        public Dictionary<Assembly, Mod[]> Mods { get; set; }
+        public IVersion ModVer { get; set; }
+        public IVersion GameVer { get; set; }
+        public IVersion ApiVer { get; set; }
     }
 }

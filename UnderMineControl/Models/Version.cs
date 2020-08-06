@@ -4,7 +4,9 @@ using System;
 
 namespace UnderMineControl.Models
 {
-    public struct Version : IComparable
+    using API.Models;
+
+    public class Version : IComparable, IVersion
     {
         public int Major { get; set; }
         public int Minor { get; set; }

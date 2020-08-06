@@ -1,9 +1,4 @@
-﻿// This was mostly copied from UnderMod (https://github.com/bwdymods/UnderMod/blob/master/UnderMod/Utils/Patcher.cs) 
-// Changes:
-//      - Better error checking
-//      - Less static references
-
-using HarmonyLib;
+﻿using HarmonyLib;
 using System;
 using System.Reflection;
 
@@ -33,8 +28,8 @@ namespace UnderMineControl.Utility
         /// <param name="logger">The logger instance</param>
         public Patcher(Harmony harmony, ILogger logger)
         {
-            _harmony = harmony ?? throw new NullReferenceException("harmony");
-            _logger = logger ?? throw new NullReferenceException("logger");
+            _harmony = harmony;
+            _logger = logger;
         }
 
         /// <summary>
@@ -153,3 +148,4 @@ namespace UnderMineControl.Utility
         }
     }
 }
+
