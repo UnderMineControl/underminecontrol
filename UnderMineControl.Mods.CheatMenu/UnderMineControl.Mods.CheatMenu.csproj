@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BehaviorDesigner">
+      <HintPath>E:\Steam\NewSteam\steamapps\common\UnderMine\UnderMine_Data\Managed\BehaviorDesigner.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
