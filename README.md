@@ -5,15 +5,14 @@ This takes a lot of inspiration from the now deprecated [UnderMod](https://githu
 Check the [wiki](https://github.com/calico-crusade/underminecontrol/wiki) for more information and guides!
 
 # Features
-* Support for version 0.7.1.6 of the game on steam (Windows) (Will update to 1.0 upon release)
+* Support for version 0.7.1.6 and 1.0.0.0 of the game on Steam (Windows)
 * Allows for patching of methods in the game using [Harmony](https://github.com/pardeike/Harmony)
 * Allows for extending the game by adding new elements from unity using [BepInEx](https://github.com/BepInEx/BepInEx)
 * Adds an easy to use API for accessing common functionality in the game [UnderMineControl.Api](https://github.com/calico-crusade/underminecontrol/tree/master/UnderMineControl.API)
 	* Exposes elements of the game via interfaces to allow easy updates between game releases
 
 # Future Updates
-* Planning to update to version 1.0 of the game upon release
-* Adding NexusMods support
+* Adding NexusMods support or a custom od loader
 
 
 ---
