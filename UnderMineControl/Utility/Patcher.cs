@@ -12,6 +12,8 @@ namespace UnderMineControl.Utility
     /// </summary>
     public class Patcher : IPatcher
     {
+        private const BindingFlags BindingFlagsAll = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance;
+
         /// <summary>
         /// The Harmony instance
         /// </summary>
@@ -145,6 +147,86 @@ namespace UnderMineControl.Utility
 
             //We did it! Yay!
             return hm;
+        }
+
+        /// <summary>
+        /// Gets the value of a specific field
+        /// </summary>
+        /// <typeparam name="T">The type of the field</typeparam>
+        /// <param name="instance">The instance of the object the field is on</param>
+        /// <param name="name">The name of the field</param>
+        /// <param name="type">The optional reference type to use</param>
+        /// <returns>The value of the field</returns>
+        public T GetField<T>(object instance, string name, Type type = null)
+        {
+            Type t = (type == null ? instance.GetType() : type);
+            return (T)t.GetField(name, BindingFlagsAll).GetValue(instance);
+        }
+
+        /// <summary>
+        /// Sets the value of a specific field
+        /// </summary>
+        /// <param name="instance">The instance of the object the field is on</param>
+        /// <param name="name">The name of the field</param>
+        /// <param name="value">The value to set the field to</param>
+        /// <param name="type">The optional type of the field</param>
+        public void SetField(object instance, string name, object value, Type type = null)
+        {
+            Type t = (type == null ? instance.GetType() : type);
+            t.GetField(name, BindingFlagsAll).SetValue(instance, value);
+        }
+
+        /// <summary>
+        /// Gets the value of a specific property
+        /// </summary>
+        /// <typeparam name="T">The type of the property</typeparam>
+        /// <param name="instance">The instance of the object the property is on</param>
+        /// <param name="name">The name of the property</param>
+        /// <param name="type">The optional reference type to use</param>
+        /// <returns>The value of the property</returns>
+        public T GetProperty<T>(object instance, string name, Type type = null)
+        {
+            Type t = (type == null ? instance.GetType() : type);
+            return (T)t.GetProperty(name, BindingFlagsAll).GetValue(instance);
+        }
+
+        /// <summary>
+        /// Sets the value of a specific property
+        /// </summary>
+        /// <param name="instance">The instance of the object the property is on</param>
+        /// <param name="name">The name of the property</param>
+        /// <param name="value">The value to set the property to</param>
+        /// <param name="type">The optional type of the property</param>
+        public void SetProperty(object instance, string name, object value, Type type = null)
+        {
+            Type t = (type == null ? instance.GetType() : type);
+            t.GetProperty(name, BindingFlagsAll).SetValue(instance, value);
+        }
+
+        /// <summary>
+        /// Invokes a method on an object
+        /// </summary>
+        /// <typeparam name="T">The return type of the method</typeparam>
+        /// <param name="instance">The object the method is on</param>
+        /// <param name="name">The name of the method</param>
+        /// <param name="type">The optional type of the object</param>
+        /// <returns>The methods return result</returns>
+        public T Invoke<T>(object instance, string name, Type type = null)
+        {
+            Type t = (type == null ? instance.GetType() : type);
+            return (T)t.GetMethod(name, BindingFlagsAll).Invoke(instance, null);
+        }
+
+        /// <summary>
+        /// Invoke a method on an object
+        /// </summary>
+        /// <param name="instance">The object the method is on</param>
+        /// <param name="name">The name of the method</param>
+        /// <param name="type">The optional type of the object</param>
+        public void Invoke(object instance, string name, Type type = null)
+        {
+            Type t = (type == null ? instance.GetType() : type);
+            t.GetMethod(name, BindingFlagsAll).Invoke(instance, null);
         }
     }
 }
