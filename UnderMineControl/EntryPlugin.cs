@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using BepInEx;
 using HarmonyLib;
+using Thor;
 
 namespace UnderMineControl
 {
     using API;
-    using System.Runtime.InteropServices;
-    using Thor;
+    using Menu;
     using Utility;
 
     [BepInPlugin("org.underminecontrol.api.entryplugin", "Entry Plugin", "1.0.0.0")]
@@ -24,6 +25,9 @@ namespace UnderMineControl
         private IPlayer _player;
         private IModLoader _loader;
         private IConfigReader _config;
+        private IResourceUtility _resources;
+
+        private List<Mod> _loadedMods = new List<Mod>();
 
         public EntryPlugin()
         {
@@ -39,6 +43,7 @@ namespace UnderMineControl
             {
                 _patcher.Patch(this, typeof(Game), "Start", null, "GameStart_Bind");
                 _patcher.Patch(this, typeof(ResourcePanel), "Initialize", null, "PatchVersion_Bind");
+                _patcher.Patch(this, typeof(PlayerChapter), "Initialize", null, "PatchGameTime_Bind");
             }
             catch (Exception ex)
             {
@@ -52,9 +57,10 @@ namespace UnderMineControl
             {
                 _config = new ConfigReader();
                 _loader = new ModLoader(_logger, _config);
-                _game = new UnderMineGame(Game.Instance);
+                _game = new UnderMineGame(Game.Instance, _logger);
                 _player = new PlayerWrapper(_game);
                 _events = new Events(_game, _logger, _patcher);
+                _resources = new ResourceUtility();
 
                 var mods = _loader?.LoadMods();
                 if (mods == null)
@@ -94,8 +100,11 @@ namespace UnderMineControl
                                 mod.Logger = _logger;
                                 mod.Patcher = _patcher;
                                 mod.Player = _player;
+                                mod.Resources = _resources;
+                                mod.MenuRenderer = new MenuUtility(_resources);
 
                                 mod.Initialize();
+                                _loadedMods.Add(mod);
                                 _modCount += 1;
                             }
                             catch (Exception ex)
@@ -112,6 +121,21 @@ namespace UnderMineControl
             catch (Exception ex)
             {
                 _logger.Error($"Error while setting up mods: \r\n{ex}");
+            }
+        }
+
+        private void OnGUI()
+        {
+            foreach(var mod in _loadedMods)
+            {
+                try
+                {
+                    mod.OnGUI();
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogError("Error occurred while running OnGUI for " + mod.ModData.Data.Name + "\r\n" + ex);
+                }
             }
         }
 
@@ -133,6 +157,32 @@ namespace UnderMineControl
         public static void GameStart_Bind()
         {
             _instance.InitializeMods();
+        }
+
+        public static void PatchGameTime_Bind(PlayerChapter __instance)
+        {
+            try
+            {
+                PatchGoldAmount(__instance);
+            }
+            catch (Exception ex)
+            {
+                _instance._logger.Error("Error patching gold amount: " + ex);
+            }
+        }
+
+        private static void PatchGoldAmount(PlayerChapter chapter)
+        {
+            var patcher = _instance._patcher;
+            InventoryExt extension1 = chapter.Owner.GetExtension<InventoryExt>();
+
+            var goldText = patcher.GetField<LocalizedText>(chapter, "m_goldText");
+
+            int resource1 = extension1.GetResource(GameData.Instance.GoldResource);
+            int goldRetainAmount = Game.Instance.ResourceManager.GetGoldRetainAmount(resource1);
+            goldText.Text = resource1 < 0 || Game.Instance.Mode != Game.GameMode.Story ? 
+                    "{" + resource1.ToString() + "}" : 
+                    string.Format("{0} {{{1}}}", resource1, goldRetainAmount);
         }
     }
 }

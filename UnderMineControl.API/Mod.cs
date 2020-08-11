@@ -31,10 +31,26 @@
         /// Gets the mod's information
         /// </summary>
         public IMod ModData { get; set; }
+        /// <summary>
+        /// Allows access to resources embedded within your mod
+        /// </summary>
+        public IResourceUtility Resources { get; set; }
+        /// <summary>
+        /// Allows your application to render it's own menu!
+        /// </summary>
+        public IMenu MenuRenderer { get; set;  }
 
         /// <summary>
         /// Fired whenever the game starts
         /// </summary>
         public abstract void Initialize();
+
+        /// <summary>
+        /// Allows for drawing things to the UI
+        /// </summary>
+        public virtual void OnGUI() 
+        {
+            MenuRenderer?.Render();
+        }
     }
 }

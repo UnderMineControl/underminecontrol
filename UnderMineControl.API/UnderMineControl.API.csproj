@@ -53,8 +53,15 @@
     <Compile Include="IEvents.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="ILogger.cs" />
+    <Compile Include="IMenu.cs" />
     <Compile Include="IPatcher.cs" />
     <Compile Include="IPlayer.cs" />
+    <Compile Include="IResourceUtility.cs" />
+    <Compile Include="MenuItems\IMenuButton.cs" />
+    <Compile Include="MenuItems\IMenuCheckBox.cs" />
+    <Compile Include="MenuItems\IMenuItem.cs" />
+    <Compile Include="MenuItems\IMenuLabel.cs" />
+    <Compile Include="MenuItems\IMenuTextBox.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="Models\IMod.cs" />
     <Compile Include="Models\IModSettings.cs" />

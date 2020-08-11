@@ -69,6 +69,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UnityAnalyticsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\UnityEngine.UnityAnalyticsModule.dll</HintPath>
@@ -76,6 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntryPlugin.cs" />
+    <Compile Include="Menu\MenuItems.cs" />
+    <Compile Include="Menu\MenuUtility.cs" />
     <Compile Include="Models\ModImplementation.cs" />
     <Compile Include="Models\ModJson.cs" />
     <Compile Include="Models\ModJsonVersions.cs" />
@@ -88,6 +94,7 @@
     <Compile Include="Utility\Logger.cs" />
     <Compile Include="Utility\ModLoader.cs" />
     <Compile Include="Utility\Patcher.cs" />
+    <Compile Include="Utility\ResourceUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UnderMineControl.API\UnderMineControl.API.csproj">
@@ -96,6 +103,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\UnderMineBackground.png" />
+    <EmbeddedResource Include="Assets\UnderMineWindow.png" />
     <Content Include="libs\0Harmony.dll" />
     <Content Include="libs\Assembly-CSharp.dll" />
     <Content Include="libs\BepInEx.dll" />
@@ -103,6 +112,7 @@
     <Content Include="libs\UnderMine.dll" />
     <Content Include="libs\UnityEngine.CoreModule.dll" />
     <Content Include="libs\UnityEngine.dll" />
+    <Content Include="libs\UnityEngine.IMGUIModule.dll" />
     <Content Include="libs\UnityEngine.UnityAnalyticsModule.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
