@@ -102,6 +102,7 @@ namespace UnderMineControl
                                 mod.Player = _player;
                                 mod.Resources = _resources;
                                 mod.MenuRenderer = new MenuUtility(_resources);
+                                mod.Configuration = new ConfigurationUtility(_logger, mod.ModData.ModDirectory);
 
                                 mod.Initialize();
                                 _loadedMods.Add(mod);

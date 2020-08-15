@@ -58,6 +58,7 @@ namespace UnderMineControl.Utility
             {
                 Data = json,
                 JsonFilePath = jsonFilePath,
+                ModDirectory = Path.GetDirectoryName(jsonFilePath),
                 ApiVer = new Version(json.Versions.Api),
                 GameVer = new Version(json.Versions.Game),
                 ModVer = new Version(json.Versions.Mod),

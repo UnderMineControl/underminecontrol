@@ -39,6 +39,10 @@
         /// Allows your application to render it's own menu!
         /// </summary>
         public IMenu MenuRenderer { get; set;  }
+        /// <summary>
+        /// Allows access to configuration files
+        /// </summary>
+        public IConfiguration Configuration { get; set; }
 
         /// <summary>
         /// Fired whenever the game starts

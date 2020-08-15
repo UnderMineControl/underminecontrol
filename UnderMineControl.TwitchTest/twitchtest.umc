@@ -1,0 +1,23 @@
+﻿# The name of the mod
+Name: Twitch Test
+
+# A description of the mod
+TagLine: A collection of cheats bound to The Function keys
+
+# The author of the mod
+Author: calico-crusade
+
+# The version of the game the mod supports
+GameVersion: 1.0.0.51
+
+# The version of the api the mod uses
+ApiVersion: 2.1.0.0
+
+# The version of your mod
+Version: 1.2.0.0
+
+# This is the list of all of the files that contain a mod, split by a colon (,). Example: Mod1.dll, Mod2.dll 
+EntryFiles: UnderMineControl.TwitchTest.dll
+
+# The URL to the home page of your mod
+Url: https://github.com/calico-crusade/umc-cheatmenu
