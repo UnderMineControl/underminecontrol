@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IConfiguration.cs" />
     <Compile Include="IEvents.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="ILogger.cs" />

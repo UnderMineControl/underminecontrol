@@ -34,7 +34,7 @@ namespace UnderMineControl.Utility
             var curDir = Environment.CurrentDirectory;
             var files = Directory.GetFiles(curDir, FILE_EXT, SearchOption.AllDirectories);
             _logger.Debug($"Found {files.Length} mods! Starting load.\r\n{curDir}");
-            foreach(var file in files)
+            foreach (var file in files)
             {
                 var json = _config.LoadModJson(file);
                 if (json == null)
@@ -58,6 +58,7 @@ namespace UnderMineControl.Utility
             {
                 Data = json,
                 JsonFilePath = jsonFilePath,
+                ModDirectory = Path.GetDirectoryName(jsonFilePath),
                 ApiVer = new Version(json.Versions.Api),
                 GameVer = new Version(json.Versions.Game),
                 ModVer = new Version(json.Versions.Mod),
@@ -72,7 +73,7 @@ namespace UnderMineControl.Utility
 
             var baseDir = Path.GetDirectoryName(jsonFilePath);
 
-            foreach(var file in json.EntryFiles)
+            foreach (var file in json.EntryFiles)
             {
                 _logger.Debug($"Start loading entry file: {file}");
                 var path = Path.Combine(baseDir, file);
@@ -116,9 +117,9 @@ namespace UnderMineControl.Utility
         {
             var t = typeof(Mod);
             var types = assm.GetTypes();
-            foreach(var type in types)
+            foreach (var type in types)
             {
-                if (type.IsInterface || 
+                if (type.IsInterface ||
                     type.IsAbstract ||
                     !t.IsAssignableFrom(type))
                     continue;

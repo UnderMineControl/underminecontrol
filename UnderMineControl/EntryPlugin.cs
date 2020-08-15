@@ -102,6 +102,7 @@ namespace UnderMineControl
                                 mod.Player = _player;
                                 mod.Resources = _resources;
                                 mod.MenuRenderer = new MenuUtility(_resources);
+                                mod.Configuration = new ConfigurationUtility(_logger, mod.ModData.ModDirectory);
 
                                 mod.Initialize();
                                 _loadedMods.Add(mod);
@@ -126,7 +127,7 @@ namespace UnderMineControl
 
         private void OnGUI()
         {
-            foreach(var mod in _loadedMods)
+            foreach (var mod in _loadedMods)
             {
                 try
                 {
@@ -180,8 +181,8 @@ namespace UnderMineControl
 
             int resource1 = extension1.GetResource(GameData.Instance.GoldResource);
             int goldRetainAmount = Game.Instance.ResourceManager.GetGoldRetainAmount(resource1);
-            goldText.Text = resource1 < 0 || Game.Instance.Mode != Game.GameMode.Story ? 
-                    "{" + resource1.ToString() + "}" : 
+            goldText.Text = resource1 < 0 || Game.Instance.Mode != Game.GameMode.Story ?
+                    "{" + resource1.ToString() + "}" :
                     string.Format("{0} {{{1}}}", resource1, goldRetainAmount);
         }
     }
