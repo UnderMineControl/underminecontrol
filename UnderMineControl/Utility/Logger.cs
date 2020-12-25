@@ -8,6 +8,7 @@
     public class Logger : ILogger
     {
         private const string APP_NAME = "UnderMineControl";
+        public static bool WriteToFile = false;
 
         /// <summary>
         /// The different log levels available
@@ -32,6 +33,10 @@
         public void Log(LogLevel level, string message)
         {
             var msg = $"[{APP_NAME}::{level}] {message}";
+
+            if (WriteToFile)
+                System.IO.File.AppendAllText("log.txt", "\r\n" + msg);
+
             switch (level)
             {
                 default:

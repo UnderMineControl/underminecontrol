@@ -98,5 +98,7 @@ namespace UnderMineControl.API
         /// <param name="key">The key to check</param>
         /// <returns>Whether or not the key is not being held</returns>
         bool KeyUp(KeyCode key);
+
+        Entity FindEnemyPrefab(EntityData data);
     }
 }

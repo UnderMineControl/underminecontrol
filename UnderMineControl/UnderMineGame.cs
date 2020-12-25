@@ -266,7 +266,7 @@ namespace UnderMineControl
         /// <returns>Whether or not the key is held down</returns>
         public bool KeyDown(KeyCode key)
         {
-            return Input.GetKeyDown(key);
+            return Input.GetKeyUp(key);
         }
 
         /// <summary>

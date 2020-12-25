@@ -28,36 +28,72 @@ namespace UnderMineControl.Utility
 
         public static void AvatarSpawned(SimulationPlayer player)
         {
-            _instance._logger.Debug($"Avatar Spawned: {player?.Avatar?.name}");
-            _instance.OnAvatarSpawned?.Invoke(_instance._game, player);
+            try
+            {
+                _instance._logger.Debug($"Avatar Spawned: {player?.Avatar?.name}");
+                _instance.OnAvatarSpawned?.Invoke(_instance._game, player);
+            }
+            catch (Exception ex)
+            {
+                _instance._logger.Error(nameof(AvatarSpawned) + "GAME UPDATED: Error occurred: \r\n" + ex.ToString());
+            }
         }
 
         public static void AvatarDestroyed(SimulationPlayer player)
         {
-            _instance._logger.Debug($"Avatar Destroyed: {player?.Avatar?.name}");
-            _instance.OnAvatarDestroyed?.Invoke(_instance._game, player);
+
+            try
+            {
+                _instance._logger.Debug($"Avatar Destroyed: {player?.Avatar?.name}");
+                _instance.OnAvatarDestroyed?.Invoke(_instance._game, player);
+            }
+            catch (Exception ex)
+            {
+                _instance._logger.Error(nameof(AvatarDestroyed) + "GAME UPDATED: Error occurred: \r\n" + ex.ToString());
+            }
         }
 
         public static void GameUpdated()
         {
-            _instance.OnGameUpdated?.Invoke(_instance._game, _instance._game);
+            try
+            {
+                _instance.OnGameUpdated?.Invoke(_instance._game, _instance._game);
+            }
+            catch (Exception ex)
+            {
+                _instance._logger.Error(nameof(GameUpdated) + "GAME UPDATED: Error occurred: \r\n" + ex.ToString());
+            }
         }
 
         public static void SimulationEvent(SimulationEvent simEvent)
         {
-            _instance.OnSimulationEvent?.Invoke(_instance._game, simEvent);
-        }
+            try
+            {
+                _instance.OnSimulationEvent?.Invoke(_instance._game, simEvent);
+            }
+            catch (Exception ex)
+            {
+                _instance._logger.Error(nameof(SimulationEvent) + "SIMULATION EVENT: Error occurred: \r\n" + ex.ToString());
+            }
+        } 
 
         public static void PlayerEvent(PlayerEvent playerEvent)
         {
-            switch (playerEvent.Type)
+            try
             {
-                case Thor.PlayerEvent.EventType.DestroysAvatar:
-                    _instance.OnAvatarSpawned(_instance._game, playerEvent?.Player);
-                    break;
-                case Thor.PlayerEvent.EventType.SpawnsAvatar:
-                    _instance.OnAvatarDestroyed(_instance._game, playerEvent?.Player);
-                    break;
+                switch (playerEvent.Type)
+                {
+                    case Thor.PlayerEvent.EventType.DestroysAvatar:
+                        _instance.OnAvatarSpawned(_instance._game, playerEvent?.Player);
+                        break;
+                    case Thor.PlayerEvent.EventType.SpawnsAvatar:
+                        _instance.OnAvatarDestroyed(_instance._game, playerEvent?.Player);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                _instance._logger.Error(nameof(PlayerEvent) + ": Error occurred: \r\n" + ex.ToString());
             }
         }
 

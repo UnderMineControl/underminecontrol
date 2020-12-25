@@ -41,7 +41,7 @@ namespace UnderMineControl
         {
             try
             {
-                _patcher.Patch(this, typeof(Game), "Start", null, "GameStart_Bind");
+                _patcher.Patch(this, typeof(Game), "Awake", null, "GameStart_Bind");
                 _patcher.Patch(this, typeof(ResourcePanel), "Initialize", null, "PatchVersion_Bind");
                 _patcher.Patch(this, typeof(PlayerChapter), "Initialize", null, "PatchGameTime_Bind");
             }
