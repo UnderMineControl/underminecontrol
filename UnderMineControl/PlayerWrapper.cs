@@ -1,5 +1,6 @@
 ﻿namespace UnderMineControl
 {
+    using System.Collections.Generic;
     using API;
     using Thor;
 
@@ -9,23 +10,33 @@
         public HealthExt Health => _game.Player.Avatar.GetExtension<HealthExt>();
         public DamageExt Damage => _game.Player.Avatar.GetExtension<DamageExt>();
         public InventoryExt Inventory => _game.Player.Avatar.GetExtension<InventoryExt>();
-		#endregion
+        #endregion
 
-		#region Health
-		public int MaxHP
-		{
-			get => Health.MaxHP;
-			set => SetValue<HealthExt>("MaxHP", value);
-		}
-		public int CurrentHP
-		{
-			get => Health.CurrentHP;
+        #region Health
+        public int MaxHP
+        {
+            get => Health.MaxHP;
+            set => SetValue<HealthExt>("MaxHP", value);
+        }
+        public int CurrentHP
+        {
+            get => Health.CurrentHP;
             set => Health.SetCurrentHP(value);
-		}
+        }
         public bool Invulnerable
         {
             get => Health.Invulnerable;
             set => Health.Invulnerable = value;
+        }
+
+        public List<ItemData> StatusEffects
+        {
+            get
+            {
+                List<ItemData> statusEffects = new List<ItemData>();
+                Health.GetStatusEffectData(statusEffects, true);
+                return statusEffects;
+            }
         }
         #endregion
 
@@ -50,6 +61,23 @@
             get => Inventory.GetResource(GameData.Instance.ThoriumResource);
             set => Inventory.ChangeResource(GameData.Instance.ThoriumResource, value);
         }
+
+        public List<ItemData> Equipment
+        {
+            get
+            {
+                List<ItemData> equipment = new List<ItemData>();
+                Inventory.GetEquipmentData(equipment);
+                return equipment;
+            }
+        }
+
+        public ItemData BombType => Equipment.Find(item => item.Hint.HasFlag(ItemData.ItemHint.Relic) && item.Slot == "bomb");
+
+        public ItemData ThrowType => Equipment.Find(item => item.Hint.HasFlag(ItemData.ItemHint.Relic) && item.Slot == "gloves");
+
+        public int PotionSlots => throw new System.NotImplementedException();
+
         #endregion
 
         private readonly IGame _game;
@@ -100,6 +128,46 @@
             };
 
             Health.ChangeHP(args, out int _);
+        }
+
+        public List<ItemData> GetRelics(bool? disabled = null, bool? unique = null)
+        {
+            // TODO: Implement filtering
+            return StatusEffects.FindAll(item => item.Hint.HasFlag(ItemData.ItemHint.Relic));
+        }
+
+        public List<ItemData> GetBlessings()
+        {
+            return StatusEffects.FindAll(item => item.Hint.HasFlag(ItemData.ItemHint.Blessing));
+        }
+
+        public List<ItemData> GetCurses(bool? permanent = null)
+        {
+            // TODO: Implement filtering
+            return StatusEffects.FindAll(item => item.Hint.HasFlag(ItemData.ItemHint.Curse));
+        }
+
+        public List<ItemData> GetHexes()
+        {
+            return StatusEffects.FindAll(item => item.Hint.HasFlag(ItemData.ItemHint.Hex));
+        }
+
+        public List<ItemData> GetPotions(bool? carried = null)
+        {
+            if (carried == true)
+            {
+                return Equipment.FindAll(item => item.Hint.HasFlag(ItemData.ItemHint.Potion));
+            }
+            
+            if (carried == false)
+            {
+                return StatusEffects.FindAll(item => item.Hint.HasFlag(ItemData.ItemHint.Potion));
+            }
+
+            List<ItemData> items = new List<ItemData>();
+            Health.GetStatusEffectData(items, true);
+            Inventory.GetEquipmentData(items);
+            return items.FindAll(item => item.Hint.HasFlag(ItemData.ItemHint.Potion));
         }
     }
 }

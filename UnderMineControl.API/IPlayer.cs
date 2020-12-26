@@ -1,4 +1,5 @@
-﻿using Thor;
+﻿using System.Collections.Generic;
+using Thor;
 
 namespace UnderMineControl.API
 {
@@ -34,9 +35,25 @@ namespace UnderMineControl.API
         bool Invulnerable { get; set; }
 
         /// <summary>
+        /// A list of currently active status effects
+        /// </summary>
+        List<ItemData> StatusEffects { get; }
+
+        /// <summary>
         /// The number of bombs the player has
         /// </summary>
         int Bombs { get; set; }
+
+        /// <summary>
+        /// The type of bomb the player is carrying (unique bomb relic)
+        /// </summary>
+        ItemData BombType { get; }
+
+        /// <summary>
+        /// The current throw type (unique throw relic)
+        /// </summary>
+        ItemData ThrowType { get; }
+
         /// <summary>
         /// The number of keys the player has
         /// </summary>
@@ -49,6 +66,51 @@ namespace UnderMineControl.API
         /// How much Thorium the player has
         /// </summary>
         int Thorium { get; set; }
+
+        /// <summary>
+        /// The maximum number of potions the player can carry
+        /// </summary>
+        int PotionSlots { get; }
+
+        /// <summary>
+        /// A list of all carried equipment
+        /// </summary>
+        List<ItemData> Equipment { get; }
+
+        /// <summary>
+        /// Gets a list of equiped relics
+        /// </summary>
+        /// <param name="disabled">Get only disabled relics (t), only enabled (f), or all (n)</param>
+        /// <param name="unique">Get only unique relics (t), only standard relics (f), or all (n)</param>
+        /// <returns>A list of relics that match the query</returns>
+        List<ItemData> GetRelics(bool? disabled, bool? unique);
+
+        /// <summary>
+        /// Gets a list of active blessings
+        /// </summary>
+        /// <returns>A list of active blessings</returns>
+        List<ItemData> GetBlessings();
+
+        /// <summary>
+        /// Gets a list of active curses
+        /// </summary>
+        /// <param name="permanent">Get only permanent curses (t), only non-permanent (f), or all (n)</param>
+        /// <returns>A list of curses that match the query</returns>
+        List<ItemData> GetCurses(bool? permanent);
+
+        /// <summary>
+        /// Gets a list of active hexes
+        /// </summary>
+        /// <returns>A list of active hexes</returns>
+        List<ItemData> GetHexes();
+
+        /// <summary>
+        /// Gets a list of potions
+        /// </summary>
+        /// <param name="carried">Get only carried potions (t), only consumed potion effects (f), or all (n)</param>
+        /// <returns>A list of potions matching the query</returns>
+        List<ItemData> GetPotions(bool? carried);
+
 
         /// <summary>
         /// Allows for accessing properties on the different extension classes
@@ -71,6 +133,7 @@ namespace UnderMineControl.API
         /// Adds a random blessing to your character
         /// </summary>
         void AddRandomBlessing();
+
         /// <summary>
         /// Adds a random curse to your character
         /// </summary>
